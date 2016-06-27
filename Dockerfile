@@ -1,9 +1,9 @@
 # Creates distributed hadoop 2.7.1
 #
-# docker build -t bimsj-hadoop2.7.1-cluster .
+# docker build -t billy7074396/bimsj-hadoop2.7.1-cluster .
 
 # Pull base image.
-FROM bimsj-hadoop2.7.1-base
+FROM billy7074396/bimsj-hadoop2.7.1-base
 MAINTAINER bimsj
 
 USER root
@@ -59,7 +59,7 @@ EXPOSE 49707 2122 22 4789 7946
 
 CMD ["/start.sh", "-d"]
 
-#docker run -p 8088:8088 --net multihost-network --name hadoopmaster -h master -d -it bimsj-hadoop2.7.1-cluster /start.sh master -bash
+#docker run -p 8088:8088 --net multihost-network --name hadoopmaster -h master -d -it billy7074396/bimsj-hadoop2.7.1-cluster /start.sh master -bash
 #docker exec -ti hadoopmaster bash
 #yarn node -list  
-#docker run --net multihost-network --name hadoopslave -h slave1 -it bimsj-hadoop2.7.1-cluster /start.sh slave 10.0.0.2
+#docker run --net multihost-network --name hadoopslave -h slave1 -it billy7074396/bimsj-hadoop2.7.1-cluster /start.sh slave 10.0.0.2
