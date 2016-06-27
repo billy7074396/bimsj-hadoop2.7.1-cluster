@@ -1,6 +1,6 @@
 # Hadoop 2.7.1 Cluster Docker image
 這是一個利用Docker製作的Apache Hadoop 2.7.1部署叢集用的映像檔。
-該版本利用 [bimsj-hadoop2.7.1-base](https://github.com/billy7074396/bimsj-hadoop2.7.1-base "bimsj-hadoop2.7.1-base") 當作基底映像檔製作。
+該版本利用 [billy7074396/bimsj-hadoop2.7.1-base](https://github.com/billy7074396/bimsj-hadoop2.7.1-base "billy7074396/bimsj-hadoop2.7.1-base") 當作基底映像檔製作。
 
 此映像檔有著多項好處 : 
 
@@ -34,7 +34,7 @@ __需要更詳細的解說或安裝方式請參考 : 尚未準備完成__
 # 建立映像檔
 如果你想要自行建立的話請到專案資料夾進行Dockerfile的映像檔建立。
 ```
-docker build -t bimsj-hadoop2.7.1-cluster .
+docker build -t billy7074396/bimsj-hadoop2.7.1-cluster .
 ```
 
 # 下載映像檔
@@ -55,7 +55,7 @@ C host 192.168.1.4
 
 我們使用A host來當作Hadoop的master節點，Network名稱使用multihost-network，Container的Host名稱必為master，啟動後的參數也必須是master。
 ```
-docker run -p 8088:8088 -p 50070:50070 --net multihost-network --name hadoopmaster -h master -d -it bimsj-hadoop2.7.1-cluster /start.sh master -bash
+docker run -p 8088:8088 -p 50070:50070 --net multihost-network --name hadoopmaster -h master -d -it billy7074396/bimsj-hadoop2.7.1-cluster /start.sh master -bash
 ```
 如果Network設定時沒有多加設定，預設的第一個Container IP應為10.0.0.2
 
@@ -64,11 +64,11 @@ docker run -p 8088:8088 -p 50070:50070 --net multihost-network --name hadoopmast
 __注意 : Slave編號只能往上遞增。__
 
 ```
-docker run --net multihost-network --name hadoopslave1 -h slave1 -d -it bimsj-hadoop2.7.1-cluster /start.sh slave 10.0.0.2 1 -bash
+docker run --net multihost-network --name hadoopslave1 -h slave1 -d -it billy7074396/bimsj-hadoop2.7.1-cluster /start.sh slave 10.0.0.2 1 -bash
 ```
 接下來使用C host來當作第二個Slave節點，Network名稱使用multihost-network，Container的Host名稱必為slave後面要加編號(例如 : slave1)，啟動後的參數也必須是slave，後面的10.0.0.2為master container的IP，最後面的2為此slave的編號。
 ```
-docker run --net multihost-network --name hadoopslave1 -h slave2 -d -it bimsj-hadoop2.7.1-cluster /start.sh slave 10.0.0.2 2 -bash
+docker run --net multihost-network --name hadoopslave1 -h slave2 -d -it billy7074396/bimsj-hadoop2.7.1-cluster /start.sh slave 10.0.0.2 2 -bash
 ```
 
 需要有更多安裝解說或使用方法請至 : [https://bimsj.serveblog.net/](https://bimsj.serveblog.net/ "BIM My Technology")
